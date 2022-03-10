@@ -2,28 +2,30 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 6;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const unsigned int gappx     = 8;        /* gaps between windows */
+static const unsigned int snap      = 35;       /* snap pixel */
+static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=11" };
-static const char dmenufont[]       = "monospace:size=11";
+static const char *fonts[]          = { "SauceCodePro Nerd Font Mono:size=13" };
+static const char dmenufont[]       = "monospace:size=13";
 
 #include "/home/plebb/.cache/wal/colors-wal-dwm.h"
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7" };
+static const char *tags[] = { "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
+	 *	WM_CLASS(STRING) = instance, classes
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox", NULL,     NULL,           1 << 3,    0,          0,          -1,        -1 },
-	{ "st-256color", NULL,     NULL,       0, 	  0,          1,           0,        -1 },
+	{ "Firefox", NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
+	{ "TelegramDesktop", NULL, NULL,       1 << 4, 	  1,          0,           0,        -1 },
+	{ "Zathura", NULL,     NULL,           1 << 0,    0,          0,           0,        -1 },
+	{ "Alacritty", NULL,   NULL,		   0,         0,          1,		   0,		 -1 },
+	{ "Emacs",	 NULL,	   NULL,		   1 << 3,    0,		  0,		   0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -52,8 +54,16 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont };
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
+static const char *wificon[] = { "/home/plebb/.local/bin/wifi", NULL };
+static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL  };
+static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "1%+", "unmute", NULL  };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "1%-", "unmute", NULL  };
+static const char *brupcmd[] = { "sudo", "xbacklight", "-inc", "10", NULL  };
+static const char *brdowncmd[] = { "sudo", "xbacklight", "-dec", "10", NULL  };
+
+#include <X11/XF86keysym.h>
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -92,8 +102,13 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
+	{ MODKEY|ShiftMask,				XK_n,	   spawn,		   {.v = wificon } },
+	{ 0, XF86XK_AudioMute,					   spawn,		   {.v = mutecmd }  },
+	{ 0, XF86XK_AudioLowerVolume,			   spawn,	       {.v = voldowncmd }  },
+	{ 0, XF86XK_AudioRaiseVolume,		       spawn,		   {.v = volupcmd }  },
+	{ 0, XF86XK_MonBrightnessUp,		       spawn,	       {.v = brupcmd}  },
+	{ 0, XF86XK_MonBrightnessDown,	           spawn,		   {.v = brdowncmd}  },
 };
 
 /* button definitions */

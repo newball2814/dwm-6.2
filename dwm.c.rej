@@ -4,16 +4,16 @@
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
  	unsigned int tags;
--	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
-+	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+-	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
  	Client *next;
  	Client *snext;
  	Monitor *mon;
-@@ -299,6 +301,7 @@ applyrules(Client *c)
+@@ -297,7 +295,6 @@ applyrules(Client *c)
  		&& (!r->class || strstr(class, r->class))
  		&& (!r->instance || strstr(instance, r->instance)))
  		{
-+			c->iscentered = r->iscentered;
+-			c->iscentered = r->iscentered;
  			c->isfloating = r->isfloating;
  			c->tags |= r->tags;
  			for (m = mons; m && m->num != r->monitor; m = m->next);

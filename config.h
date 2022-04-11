@@ -7,13 +7,13 @@ static const unsigned int snap      = 35;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "SauceCodePro Nerd Font Mono:size=13" };
+static const char *fonts[]          = { "Ubuntu Mono Nerd Font:size=14" };
 static const char dmenufont[]       = "JetBrains Mono:size=13";
 
 #include "/home/plebb/.cache/wal/colors-wal-dwm.h"
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -22,7 +22,7 @@ static const Rule rules[] = {
 	 */
 	/* class       instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Firefox",   NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
-	{ "TelegramDesktop", NULL, NULL,         1 << 4, 	1,          0,           0,        -1 },
+	{ "TelegramDesktop", NULL, NULL,         1 << 5, 	1,          0,           0,        -1 },
 	{ "Zathura",   NULL,     NULL,           1 << 0,    0,          0,           0,        -1 },
 	{ "URxvt",     NULL,     NULL,		     0,         1,          1,		     0,		   -1 },
 	{ "St",		   NULL,	 NULL,			 0,         0,			0,			 0,        -1 },
@@ -70,8 +70,8 @@ static const char *brdowncmd[] = { "xbacklight", "-dec", "5", NULL  };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ControlMask,			XK_Return, spawn,		   {.v = stterm } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = stterm } },
+	{ MODKEY|ControlMask,			XK_Return, spawn,		   {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

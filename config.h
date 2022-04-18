@@ -68,6 +68,7 @@ static const char *brupcmd[] = { "xbacklight", "-inc", "5", NULL  };
 static const char *brdowncmd[] = { "xbacklight", "-dec", "5", NULL  };
 
 #include <X11/XF86keysym.h>
+#include "movestack.c"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -99,6 +100,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

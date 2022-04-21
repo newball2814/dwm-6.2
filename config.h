@@ -7,13 +7,25 @@ static const unsigned int snap      = 35;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Ubuntu Mono Nerd Font:size=14" };
+static const char *fonts[]          = { "Ubuntu Mono Nerd Font:size=14", "JetBrains Mono:size=14" };
 static const char dmenufont[]       = "JetBrains Mono:size=13";
 
 #include "/home/plebb/.cache/wal/colors-wal-dwm.h"
 
 /* tagging */
-static const char *tags[] = { " ", " ", " ", " ", " ", " ", " ",  " " };
+//static const char *tags[] = { " ", " ", " ", " ", " ", " ", " ",  " ", " " };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+/* taglabels variables */
+static const char ptagf[] = "[%s %s]"; /* format of a tag label */
+static const char etagf[] = "[%s]";    /* format of an empty tag */
+static const int lcaselbl = 0;     /* 1 means make tag label lowercase */
+
+/* hidevacanttags variables */
+static const unsigned int ulinepad		= 5;    /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 2;    /* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 0;    /* how far above the bottom of the bar the line should     appear */
+static const int ulineall				= 0;    /* 1 to show underline on all tags, 0 for just the active ones     */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -110,6 +122,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
+	TAGKEYS(						XK_9,					   8)
 	{ MODKEY|ControlMask,           XK_r,      quit,           {0} },
 	{ MODKEY|ShiftMask,				XK_n,	   spawn,		   {.v = wificon } },
 	{ 0, XF86XK_AudioMute,					   spawn,		   {.v = mutecmd }  },
